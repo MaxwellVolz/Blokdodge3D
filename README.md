@@ -1,3 +1,16 @@
+# Blokdodge3D
+
+### References
+
+- [react-three-fiber](https://github.com/pmndrs/react-three-fiber)
+- [react-three-fiber examples](https://docs.pmnd.rs/react-three-fiber/getting-started/examples)
+- [react-three-fiber collision reference](https://codesandbox.io/s/trigger-meshes-forked-izcgm?file=/src/App.js:941-942)
+- [threejs](https://threejs.org/docs/index.html)
+
+### Concept
+
+![Concept Art](images/blokdodge3d_sketch.png)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
