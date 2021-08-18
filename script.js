@@ -1,4 +1,5 @@
 
+
 var renderer, scene, camera, controls;
 var mesh, mesh2, mesh3, mesh4, mesh5, mesh6;
 
@@ -6,7 +7,10 @@ init();
 render();
 animate();
 
-// var collisions = [];
+// http://www.bryanjones.us/front-end-development
+// http://www.bryanjones.us/article/basic-threejs-game-tutorial-part-1-basics
+// http://www.bryanjones.us/article/basic-threejs-game-tutorial-part-5-collision-detection
+
 
 function init() {
 
@@ -133,24 +137,3 @@ function animate() {
 
     renderer.render( scene, camera );
 }
-
-/**
- * Calculates collision detection parameters.
- * http://www.bryanjones.us/article/basic-threejs-game-tutorial-part-5-collision-detection
- */
-//  function calculateCollisionPoints( mesh, scale, type = 'collision' ) { 
-//     // Compute the bounding box after scale, translation, etc.
-//     var bbox = new THREE.Box3().setFromObject(mesh);
-   
-//     var bounds = {
-//       type: type,
-//       xMin: bbox.min.x,
-//       xMax: bbox.max.x,
-//       yMin: bbox.min.y,
-//       yMax: bbox.max.y,
-//       zMin: bbox.min.z,
-//       zMax: bbox.max.z,
-//     };
-   
-//     collisions.push( bounds );
-//   }
