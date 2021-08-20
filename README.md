@@ -1,5 +1,72 @@
 # Blokdodge3D
 
+## TODO
+
+### Urgent
+
+- Collision detection
+- Improve physics for falling
+- Multiple waves
+- Score
+- Jumping
+
+### Less Urgent
+
+- Visual overhaul
+- Background particle effects
+- 
+
+
+## Game Concepts
+
+### PvP
+
+- Enemy block tries to kill one or more people trying to dodge
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### References
 
 - [react-three-fiber](https://github.com/pmndrs/react-three-fiber)
