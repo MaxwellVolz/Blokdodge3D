@@ -4,7 +4,7 @@ let physicsWorld, scene, camera, renderer, rigidBodies = [], tmpTrans = null
 // Dynamic bodies
 let ballObject = null,
     moveDirection = { left: 0, right: 0, forward: 0, back: 0, up: 0 },
-    jumpCooldown = 2, jumpOnCooldown = false, jumpClock = new THREE.Clock()
+    jumpCooldown = 1, jumpOnCooldown = false, jumpClock = new THREE.Clock()
 
 const STATE = { DISABLE_DEACTIVATION: 4 }
 
@@ -65,7 +65,7 @@ function setupPhysicsWorld() {
         solver = new Ammo.btSequentialImpulseConstraintSolver();
 
     physicsWorld = new Ammo.btDiscreteDynamicsWorld(dispatcher, overlappingPairCache, solver, collisionConfiguration);
-    physicsWorld.setGravity(new Ammo.btVector3(0, -30, 0));
+    physicsWorld.setGravity(new Ammo.btVector3(0, -100, 0));
 
 }
 
@@ -156,7 +156,7 @@ function handleKeyDown(event) {
     switch (keyCode) {
 
         case 32: //↑: SPACE
-            // checkJumpStatus();
+            checkJumpStatus();
             break;
 
         case 38: //↑: FORWARD
@@ -242,11 +242,11 @@ function checkJumpStatus() {
         jumpOnCooldown = false
         jumpClock.start()
     }
-
     if (jumpOnCooldown){
-        moveDirection.up = -1
+        moveDirection.up = 0
     }
     else{
+        // Check if ball is touching ground
         moveDirection.up = 1
         jumpOnCooldown = true
     }
@@ -349,11 +349,25 @@ function moveBall() {
 
     if (moveX == 0 && moveY == 0 && moveZ == 0) return;
 
-    let resultantImpulse = new Ammo.btVector3(moveX, moveY, moveZ)
+    // TODO: if jumping disable lateral movement
+
+
+    let resultantImpulse = new Ammo.btVector3(moveX*20, moveY*100, moveZ*20)
     resultantImpulse.op_mul(scalingFactor);
 
     let physicsBody = ballObject.userData.physicsBody;
-    physicsBody.setLinearVelocity(resultantImpulse);
+
+    // Not physics based movement
+    // physicsBody.setLinearVelocity(resultantImpulse);
+
+    // Insane accel
+    // physicsBody.applyImpulse(resultantImpulse) 
+
+    // Push with applyForce
+    physicsBody.applyForce(resultantImpulse) 
+
+    moveDirection.up = 0
+
 
 }
 
@@ -503,7 +517,7 @@ function moveWave(){
         single_wave.getWorldPosition(tmpPos);
         single_wave.getWorldQuaternion(tmpQuat);
 
-        console.log(single_wave.getWorldPosition(tmpPos).z);
+        // console.log(single_wave.getWorldPosition(tmpPos).z);
 
         if (single_wave.getWorldPosition(tmpPos).z > 100){
             single_wave.translateZ(-300);
@@ -534,7 +548,7 @@ function unpackWaves(waves){
 
     waves.forEach(( wave, index) => {  
         wave.forEach((inner_element, inner_index) => {
-            console.log("index:", index, " inner_index:", inner_index)
+            // console.log("index:", index, " inner_index:", inner_index)
             if (inner_element) {
                 let x_offset = -45 + (inner_index * 12.8);
                 let z_offset = -40 + index * -15;
