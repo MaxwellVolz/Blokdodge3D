@@ -4,6 +4,8 @@
 
 ### Urgent
 
+- Hotkey to switch (chase and static)
+- Movement testing area on side
 - Collision detection
 - Improve physics for falling
 - Multiple waves

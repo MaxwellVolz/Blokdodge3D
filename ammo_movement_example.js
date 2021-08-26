@@ -65,7 +65,7 @@ function setupPhysicsWorld() {
         solver = new Ammo.btSequentialImpulseConstraintSolver();
 
     physicsWorld = new Ammo.btDiscreteDynamicsWorld(dispatcher, overlappingPairCache, solver, collisionConfiguration);
-    physicsWorld.setGravity(new Ammo.btVector3(0, -100, 0));
+    physicsWorld.setGravity(new Ammo.btVector3(0, -50, 0));
 
 }
 
@@ -238,17 +238,19 @@ function handleKeyUp(event) {
 }
 
 function checkJumpStatus() {
+    // check time since last jump
     if (jumpClock.getElapsedTime() > jumpCooldown) {
         jumpOnCooldown = false
-        jumpClock.start()
     }
+
+    // stop "jump"
     if (jumpOnCooldown){
         moveDirection.up = 0
     }
     else{
-        // Check if ball is touching ground
         moveDirection.up = 1
         jumpOnCooldown = true
+        jumpClock.start()
     }
 
 }
@@ -352,10 +354,14 @@ function moveBall() {
     // TODO: if jumping disable lateral movement
 
 
-    let resultantImpulse = new Ammo.btVector3(moveX*20, moveY*100, moveZ*20)
+    let resultantImpulse = new Ammo.btVector3(moveX*20, moveY*75, moveZ*20)
     resultantImpulse.op_mul(scalingFactor);
 
     let physicsBody = ballObject.userData.physicsBody;
+
+    physicsBody
+
+    console.log(physicsBody)
 
     // Not physics based movement
     // physicsBody.setLinearVelocity(resultantImpulse);
